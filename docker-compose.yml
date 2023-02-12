@@ -1,9 +1,11 @@
-version: '20.10.16'
+version: '3.8'
 
 services:
   db:
     container_name: postgres-NODEJS2022Q4-SERVICE
-    image: postgres:14.0-alpine
+    build:
+      dockerfile: database/Dockerfile
+      context: .
     restart: always
     environment:
       - POSTGRES_USER=${TYPEORM_USERNAME}

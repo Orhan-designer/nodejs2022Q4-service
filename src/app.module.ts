@@ -10,6 +10,11 @@ import { AlbumsModule } from './app/albums/album.module';
 import { FavoritesModule } from './app/favorites/favorites.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { User } from './app/users/entities/user.entity';
+import { Artist } from './app/artists/entities/artist.entity';
+import { Album } from './app/albums/entities/album.entity';
+import { Track } from './app/tracks/entities/track.entity';
+
 @Module({
   imports: [UsersModule, DatabaseModule, ArtistsModule, TracksModule, AlbumsModule, FavoritesModule,
     ConfigModule.forRoot({
@@ -24,8 +29,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         password: _config.get<string>('TYPEORM_PASSWORD'),
         database: _config.get<string>('TYPEORM_DATABASE'),
         port: _config.get<number>('TYPEORM_PORT'),
-        entities: ['dist/**/*.entity.{ts,js}'],
+        entities: [User, Artist, Album, Track],
         synchronize: true,
+        logging: true
       })
     })
   ],
